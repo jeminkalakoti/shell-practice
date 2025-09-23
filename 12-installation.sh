@@ -2,8 +2,9 @@
 
 # TO check if user has a root privilege to install a mysql server
 USER_ID=$(id -u)
-if [$USER_ID -ne 0 ]; then
-    echo "ERROR:: You must have a root privilege to install a mysql"
+
+if [ $USER_ID -ne 0 ]; then
+    echo "ERROR:: You must have a root privilege to install mysql"
 fi
 
 dnf install mysql -y
