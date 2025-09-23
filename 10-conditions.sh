@@ -17,3 +17,4 @@ fi
 #-ne : not equal to
 #-ge : greater than or equal to
 #-le : less than or equal to
+# && : and
