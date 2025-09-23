@@ -9,7 +9,6 @@ fi
 
 dnf install mysql -y
 
-USER_ID=$(id -u)
 if [ $? -ne 0 ]; then
     echo "ERROR:: Installing mysql is FAILED"
 else
