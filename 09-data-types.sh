@@ -7,4 +7,4 @@ NUMBER2=77
 
 sum=$((NUMBER1 + NUMBER2 + NAME)) #arithmetic operation
 
-echo "Sum is : $sum"
+echo "Sum is : ${sum}"
