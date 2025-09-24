@@ -33,5 +33,11 @@ VALIDATE(){ # Functions receive arguments like normal scripts
 # $@ is used to pass all arguments to a function
 for package in $@
 do
-    echo "Processing package: $package" # Print the current package being processed
+    dnf list installed $package &>>$LOG_FILE # Check if package is already installed
+    if [ $? -ne 0 ]; then # If not installed, then install it
+        dnf install $package -y &>>$LOG_FILE # Install package
+        VALIDATE $? "$package" # Validate installation
+    else
+        echo -e "$package is already installed ... $Y SKIPPING $N"
+    fi
 done
