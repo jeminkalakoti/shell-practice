@@ -13,7 +13,7 @@ LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # Define log file path
 # -e enables the interpretation of backslash escapes
 
 mkdir -p $LOGS_FOLDER # Create logs folder if not exists
-echo "Script started and executed at : $(date)"
+echo "Script started and executed at : $(date)" | tee -a $LOG_FILE # Log script start time
 
 if [ $USER_ID -ne 0 ]; then
     echo -e "$R ERROR $N:: You must have a root privilege to install packages" 
@@ -22,10 +22,10 @@ fi
 
 VALIDATE(){ # Functions receive arguments like normal scripts
     if [ $1 -ne 0 ]; then
-        echo -e "Installing $2 ... $R FAILED $N"
+        echo -e "Installing $2 ... $R FAILED $N" | tee -a $LOG_FILE
         exit 1 # Exit the script if installation failed with red color
     else
-        echo -e "Installing $2 ... $G SUCCESSFUL $N" # Print success message in green color
+        echo -e "Installing $2 ... $G SUCCESSFUL $N" | tee -a $LOG_FILE # Print success message in green color
     fi 
 
 }
@@ -35,7 +35,7 @@ if [ $? -ne 0 ]; then # If not installed, then install it
     dnf install mysql -y &>>$LOG_FILE # Install mysql package
     VALIDATE $? "mysql" # Validate installation
 else 
-    echo -e "mysql is already installed ... $Y SKIPPING $N" # Print message if already installed in yellow color
+    echo -e "mysql is already installed ... $Y SKIPPING $N" | tee -a $LOG_FILE # Print message if already installed in yellow color
 fi  
 
 dnf list installed nginx &>>$LOG_FILE # Check if mysql is already installed
@@ -43,7 +43,7 @@ if [ $? -ne 0 ]; then # If not installed, then install it
     dnf install nginx -y &>>$LOG_FILE
     VALIDATE $? "nginx"
 else
-    echo -e "nginx is already installed ... $Y SKIPPING $N"
+    echo -e "nginx is already installed ... $Y SKIPPING $N" | tee -a $LOG_FILE
 fi
 
 dnf list installed python3 &>>$LOG_FILE # Check if mysql is already installed
@@ -51,5 +51,5 @@ if [ $? -ne 0 ]; then # If not installed, then install it
     dnf install python3 -y &>>$LOG_FILE
     VALIDATE $? "python3"
 else
-    echo -e "python3 is already installed ... $Y SKIPPING $N"
+    echo -e "python3 is already installed ... $Y SKIPPING $N" | tee -a $LOG_FILE
 fi
