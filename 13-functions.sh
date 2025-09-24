@@ -8,7 +8,7 @@ if [ $USER_ID -ne 0 ]; then
     exit 1 # Exit the script if not root
 fi
 
-VALIDATE(){ # Functions reciece arguments like normal scripts
+VALIDATE(){ # Functions receive arguments like normal scripts
     if [ $1 -ne 0 ]; then
         echo "ERROR:: Installing $2 is FAILED"
         exit 1 # Exit the script if installation failed
@@ -19,11 +19,10 @@ VALIDATE(){ # Functions reciece arguments like normal scripts
 }
 
 dnf install mysql -y
-VALIDATE $? "mysql
+VALIDATE $? "mysql"
 
 dnf install nginx -y
 VALIDATE $? "nginx"
 
 dnf install python3 -y
 VALIDATE $? "python3"
-
