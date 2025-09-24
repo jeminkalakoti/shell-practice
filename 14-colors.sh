@@ -6,3 +6,4 @@ Y='\e[0;33m' # Yellow
 N='\e[0m'    # No Color
 
 echo -e "$R Hello World $N"
+echo "This is red color"
