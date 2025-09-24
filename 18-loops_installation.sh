@@ -31,7 +31,7 @@ VALIDATE(){ # Functions receive arguments like normal scripts
 }
 
 # $@ is used to pass all arguments to a function
-for package in "$@"
+for package in $@
 do
     echo "Processing package: $package" # Print the current package being processed
 done
