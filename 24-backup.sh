@@ -29,31 +29,57 @@ USAGE(){
     exit 1
 }
 
+### Check sourde_dir and dest_dir are provided as arguments or not
+
 if [ $# -lt 2 ]; then
     USAGE # Call usage function if less than 2 arguments are provided
 fi
+
+### Check if source_dir exists or not
 
 if [ ! -d $SOURCE_DIR ]; then
     echo -e "$R ERROR:: Source $SOURCE_DIR does not exist $N"
     exit 1 # Exit the script if source directory does not exist
 fi
 
+### Check if dest_dir exists or not
+
 if [ ! -d $DEST_DIR ]; then
     echo -e "$R ERROR:: Destination $DEST_DIR does not exist $N"
     exit 1 # Exit the script if destination directory does not exist
 fi
 
+### Find files older than specified days and archive them
+
 FILES=$(find $SOURCE_DIR -name "*.log" -type f -mtime +$DAYS) # Find files older than specified days
 
 if [ ! -z "${FILES}" ]; then # Check if FILES is not empty
+    ### Start archiving process
     echo  "Files found : $FILES"
     TIMESTAMP=$(date +%F-%H-%M) # Get current timestamp
     ZIP_FILE_NAME="$DEST_DIR/app-logs-$TIMESTAMP.zip" # Define zip file name with timestamp
     echo "zip file name : $ZIP_FILE_NAME"
     find $SOURCE_DIR -name "*.log" -type f -mtime +$DAYS | zip -@ -j "$ZIP_FILE_NAME" # Create zip file with the found files
-else
-    echo -e "No files to archive ... $Y SKIPPING $N"
 
+    ### Check archival scuccess or not
+    if [ -f $ZIP_FILE_NAME ]; then
+        echo -e "Archeival ... $G SUCCESS $N"
+
+        echo -e "No files to archive ... $Y SKIPPING $N"
+        ### Delete if archival is successful
+        while IFS= read -r filepath # Read each file from the list
+        do
+        echo -e "$Y Deleting file $N: $filepath" # Log the file being deleted
+        rm -rf $filepath # Delete the file
+        echo -e "$R Deleted file $N: $filepath" # Log the deletion
+        done <<< "$FILES" # Read each file from the list
+    else
+        echo -e "Archeival ... $R FAILED $N" # Print message if zip file creation failed
+        exit 1
+    fi
+else
+    echo -e "No files to archive ... $Y SKIPPING $N" # Print message if no files to archive
+    
 fi
 
 
