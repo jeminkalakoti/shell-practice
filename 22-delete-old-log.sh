@@ -22,7 +22,7 @@ if [ ! -d $SOURCE_DIR ]; then
     exit 1 # Exit the script if source directory does not exist
 fi
 
-FILES_TO_DELETE=$(find $SOURCE_DIR -name "*.log" -type f -mtime +9) # Find log files older than 14 days
+FILES_TO_DELETE=$(find $SOURCE_DIR -name "*.log" -type f -mtime +6) # Find log files older than 14 days
 
 while IFS= read -r filepath # Read each file from the list
 do 
