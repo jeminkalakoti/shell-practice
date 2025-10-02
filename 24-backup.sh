@@ -51,7 +51,7 @@ if [ ! -z "${FILES}" ]; then # Check if FILES is not empty
     echo "zip file name : $ZIP_FILE_NAME"
     echo $FILES | zip @ -j "$ZIP_FILE_NAME" # Create zip file with the found files
 else
-    echo -e "No files to archive ... "$Y SKIPPING $N"
+    echo -e "No files to archive ... $Y SKIPPING $N"
 
 fi
 
