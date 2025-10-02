@@ -23,3 +23,9 @@ if [ ! -d $SOURCE_DIR ]; then
 fi
 
 FILES_TO_DELETE=$(find $SOURCE_DIR -name "*.log" -type f -mtime +14) # Find log files older than 14 days
+
+while IFS= read -r filepath # Read each file from the list
+do 
+    echo "Deleting file: $filepath" # Log the file being deleted
+
+done <<< "$FILES_TO_DELETE" # Read each file from the list
