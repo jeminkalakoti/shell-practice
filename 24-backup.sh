@@ -11,7 +11,8 @@ DEST_DIR=$2   # Second argument is destination directory
 DAYS=${3:-14} # Third argument is number of days, default is 14 if not provided
 LOGS_FOLDER="/var/log/shell-script/"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 ) # Extract script name without extension
-LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # Define log file path
+#LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # Define log file path
+LOG_FILE="$LOGS_FOLDER/backup.log" # Define log file path
 
 # -e enables the interpretation of backslash escapes
 
@@ -24,7 +25,7 @@ if [ $USER_ID -ne 0 ]; then
 fi
 
 USAGE(){
-    echo -e "$R USAGE :: 24-backup.sh <SOURCE_DIR> <DEST_DIR> <DAYS> [optional default 14 days] $N"
+    echo -e "$R USAGE :: sudo sh 24-backup.sh <SOURCE_DIR> <DEST_DIR> <DAYS> [optional default 14 days] $N"
     exit 1
 }
 
