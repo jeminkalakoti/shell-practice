@@ -6,6 +6,8 @@ G='\e[0;32m' # Green
 Y='\e[0;33m' # Yellow
 N='\e[0m'    # No Color
 
+SOURCE_DIR=$1 # First argument is source directory
+DEST_DIR=$2   # Second argument is destination directory
 LOGS_FOLDER="/var/log/shell-script/"
 SCRIPT_NAME=$( echo $0 | cut -d "." -f1 ) # Extract script name without extension
 LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME.log" # Define log file path
@@ -27,4 +29,14 @@ USAGE(){
 
 if [ $# -lt 2 ]; then
     USAGE # Call usage function if less than 2 arguments are provided
+fi
+
+if [ ! -d $SOURCE_DIR ]; then
+    echo -e "$R ERROR:: Source directory $SOURCE_DIR does not exist $N"
+    exit 1 # Exit the script if source directory does not exist
+fi
+
+if [ ! -d $DEST_DIR ]; then
+    echo -e "$R ERROR:: Destination directory $DEST_DIR does not exist $N"
+    exit 1 # Exit the script if destination directory does not exist
 fi
