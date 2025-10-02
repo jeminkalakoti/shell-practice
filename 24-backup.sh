@@ -32,11 +32,11 @@ if [ $# -lt 2 ]; then
 fi
 
 if [ ! -d $SOURCE_DIR ]; then
-    echo -e "$R ERROR:: Source directory $SOURCE_DIR does not exist $N"
+    echo -e "$R ERROR:: $SOURCE_DIR does not exist $N"
     exit 1 # Exit the script if source directory does not exist
 fi
 
 if [ ! -d $DEST_DIR ]; then
-    echo -e "$R ERROR:: Destination directory $DEST_DIR does not exist $N"
+    echo -e "$R ERROR:: $DEST_DIR does not exist $N"
     exit 1 # Exit the script if destination directory does not exist
 fi
