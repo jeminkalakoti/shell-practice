@@ -49,7 +49,7 @@ if [ ! -z "${FILES}" ]; then # Check if FILES is not empty
     TIMESTAMP=$(date +%F-%H-%M) # Get current timestamp
     ZIP_FILE_NAME="$DEST_DIR/app-logs-$TIMESTAMP.zip" # Define zip file name with timestamp
     echo "zip file name : $ZIP_FILE_NAME"
-    find $SOURCE_DIR -name "*.log" -type f -mtime +$DAYS | zip @ -j "$ZIP_FILE_NAME" # Create zip file with the found files
+    find $SOURCE_DIR -name "*.log" -type f -mtime +$DAYS | zip -@ -j "$ZIP_FILE_NAME" # Create zip file with the found files
 else
     echo -e "No files to archive ... $Y SKIPPING $N"
 
