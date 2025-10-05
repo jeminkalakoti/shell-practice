@@ -3,7 +3,7 @@
 TO_ADDRESS=$1
 SUBJECT=$2
 ALERT_TYPE=$3
-MESSAGE_BODY=$4
+MESSAGE_BODY=$(echo $4 | sed 's/\\n/\n/g') # Handle new lines in the message body
 IP_ADDRESS=$5
 TO_TEAM=$6
 
