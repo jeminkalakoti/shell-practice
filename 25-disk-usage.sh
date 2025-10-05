@@ -2,7 +2,7 @@
 
 DISK_USAGE=$(df -hT | grep -v Filesystem)
 DISK_THRESHOLD=2 # In projects we use 75%
-IP_ADDRESS="$(curl http://169.254.169.254/latest/meta-data/local-ipv4)" # AWS specific
+IP_ADDRESS="$(curl -s http://169.254.169.254/latest/meta-data/local-ipv4)" # AWS specific
 MESSAGE=""
 
 while IFS= read -r line
