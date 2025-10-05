@@ -16,7 +16,7 @@ done <<< $DISK_USAGE
 
 echo -e "Message body: $MESSAGE"
 
-sh mail.sh "lakshmiande20@gmail.com" "High Disk Usage Alert" "High Disk Usage" "$MESSAGE" "$IP_ADDRESS" # Send email
+sh mail.sh "lakshmiande20@gmail.com" "High Disk Usage Alert" "High Disk Usage" "$MESSAGE" "$IP_ADDRESS" "DevOps Team" # Send email
 
 # TO_ADDRESS=$1
 # SUBJECT=$2
